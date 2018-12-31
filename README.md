@@ -4,37 +4,6 @@ Copyright (c) 2018, Blur Network</br>
 
 *See [LICENSE](LICENSE).*<br>
 
-### Donate to help support Blur:
-**BTC:** 19onVUREbP89qu4dYBfVqtGisWaoyWs3BX <br>
-**LTC:** LM2tBw25UMfdjAJbo52tzh5r3R47a1aMeM <br>
-**XMR:** 46MT7yy9mF3Bvk61XmRzirB4wdSkPqNRJ3pwUcRYxj3WWCGLMHD9sE5bNtChnYQiPYiCYDPyXyJGKFG3uT2CbeKWCwnvWLv <br>
-**BLUR:** bL4PdWFk3VVgEGYezGTXigHrsoJ3JGKgxKDi1gHXT7GKTLawFu3WMhu53Gc2KCmxxmCHbR4VEYMQ93PRv8vWgJ8j2mMHVEzLu <br>
-
-## Contents:
-- <a href="https://github.com/blur-network/blur#compile-linux">Compiling from Source</a> </br>
-- <a href="https://github.com/blur-network/blur#mining-windows">Mining on Linux/Mac</a> </br>
-- <a href="https://github.com/blur-network/blur#mining-windows">Mining on Windows</a></br>
-- <a href="https://github.com/blur-network/blur#sync-issues">Fixing Synchronization Issues</a> </br></br>
-
-Currency:   | <center> Blur (Ticker: BLUR) </center>
-|:-------|:---------:|
-**Website:** | <center> https://blur.cash </center>
-**Block Explorer:** | <center>http://explorer.blur.cash/</center>
-**Block Explorer API Example:** | <center>http://explorer.blur.cash/api/transactions</center>
-**Offline Wallet Generator:** | <center><a href="https://blur.cash/wp-content/uploads/2018/06/offline-wallet.html"> Offline HTML Page</a><center>
-**Discord (Main Point of Contact for Blur):** | <center><a href="https://discord.gg/VFP2VES"> Blur Official Discord</a> </center>
-**Telegram:** | <center> <a href="https://t.me/theblurnetwork"> Telegram </a> </center>
-**BitcoinTalk Announcement:** | <center><a href="https://bitcointalk.org/index.php?topic=4577361"> Official Thread on BitcoinTalk.org </center>
-**Reddit:** | <center> <a href="https://reddit.com/r/blur_network">Official Blur Network Subreddit</a></center>
-**CLI Binary Release(s):** | <center> <a href="https://github.com/blur-network/blur/releases"> Download via Github </a> </center>
-**GUI Wallet Release(s):** | <center><a href="https://github.com/blur-network/blur-network-gui/releases"> Download via Github</a></center>
-**Algorithm:** | <center> Cryptonight-Dynamic </center>
-   **Ports:** | <center> P2P port = 13894 </br>RPC port = 13895</br></center>
-  **Seed Nodes:** | <center> <li>Node 1: 66.70.189.131:13894</li> <li>Node 2: 66.70.189.183:13894</li> <li>Node 3: 66.70.188.178:13894</li>  </center>
-
-# About the Project
-
-BLUR takes a decentralized-by-design approach to mining.  The algorithm used to mine BLUR is incompatible with pooled mining (with current software) and is resistant to ASIC/GPU mining rigs. The BLUR network is comprised of individuals mining on individual computers. Visit our Bitcointalk.org thread or Blur.cash for more information.  Links to both can be found in the table immediately above. 
 
 <h1 id="compile-linux">Compiling from Source on Linux</h1>
 
