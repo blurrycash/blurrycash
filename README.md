@@ -1,6 +1,6 @@
 
 
-Copyright (c) 2018, Blur Network</br>
+Copyright (c) 2018, Blurrycash</br>
 
 *See [LICENSE](LICENSE).*<br>
 
