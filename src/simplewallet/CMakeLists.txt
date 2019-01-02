@@ -62,5 +62,5 @@ target_link_libraries(simplewallet
     ${EXTRA_LIBRARIES})
 set_property(TARGET simplewallet
   PROPERTY
-    OUTPUT_NAME "blur-wallet-cli")
+    OUTPUT_NAME "blurry-wallet-cli")
 install(TARGETS simplewallet DESTINATION bin)
