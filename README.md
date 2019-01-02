@@ -61,8 +61,6 @@ For Linux portable binaries:
 
 Compile from source, or download the <a href="https://github.com/blur-network/blur/releases"> latest binary release from the Releases page</a>.  
 
-We also now offer a Snap package on the Ubuntu Snap Store: <a href="https://snapcraft.io/blur"><img alt="Get it from the Snap Store" src="https://snapcraft.io/static/images/badges/en/snap-store-black.svg" /></a>
-
 Open a terminal in the directory within which the binaries were downloaded.  Assuming that is your Downloads folder, enter the following command:
 
 >`cd ~/Downloads && tar xvzf blur-v0.1.7.6-linux-x86_64.tar.xz`
