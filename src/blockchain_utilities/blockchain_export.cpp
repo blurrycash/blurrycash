@@ -1,4 +1,4 @@
-// Copyright (c) 2018-2019, Blur Network
+// Copyright (c) 2018-2019, Blurrycash
 // Copyright (c) 2014-2018, The Monero Project
 //
 // All rights reserved.
@@ -98,7 +98,7 @@ int main(int argc, char* argv[])
 
   if (command_line::get_arg(vm, command_line::arg_help))
   {
-    std::cout << "Blur Network '" << MONERO_RELEASE_NAME << "' (v" << MONERO_VERSION_FULL << ")" << ENDL << ENDL;
+    std::cout << "Blurrycash '" << MONERO_RELEASE_NAME << "' (v" << MONERO_VERSION_FULL << ")" << ENDL << ENDL;
     std::cout << desc_options << std::endl;
     return 1;
   }
