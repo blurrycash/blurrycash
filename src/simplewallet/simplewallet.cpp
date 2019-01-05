@@ -740,7 +740,7 @@ bool simple_wallet::print_fee_info(const std::vector<std::string> &args/* = std:
   }
   const uint64_t per_kb_fee = m_wallet->get_per_kb_fee();
   const uint64_t typical_size_kb = 13;
-  message_writer() << (boost::format(tr("Current fee is %s BLCH per kB")) % print_money(per_kb_fee)).str();
+  message_writer() << (boost::format(tr("Current fee is %s BLUR per kB")) % print_money(per_kb_fee)).str();
 
   std::vector<uint64_t> fees;
   for (uint32_t priority = 1; priority <= 3; ++priority)
@@ -2096,12 +2096,12 @@ simple_wallet::simple_wallet()
                                   "auto-low-priority <1|0>\n "
                                   "  Whether to automatically use the low priority fee level when it's safe to do so.\n "
                                   "segregate-pre-fork-outputs <1|0>\n "
-                                  "  Set this if you intend to spend outputs on both BLCH AND a key reusing fork.\n "
+                                  "  Set this if you intend to spend outputs on both BLUR AND a key reusing fork.\n "
                                   "key-reuse-mitigation2 <1|0>\n "
-                                  "  Set this if you are not sure whether you will spend on a key reusing BLCH fork later.\n"
+                                  "  Set this if you are not sure whether you will spend on a key reusing BLUR fork later.\n"
                                   "subaddress-lookahead <major>:<minor>\n "
                                   "  Set the lookahead sizes for the subaddress hash table.\n "
-                                  "  Set this if you are not sure whether you will spend on a key reusing BLCH fork later.\n "
+                                  "  Set this if you are not sure whether you will spend on a key reusing BLUR fork later.\n "
                                   "segregation-height <n>\n "
                                   "  Set to the height of a key reusing fork you want to use, 0 to use default."));
   m_cmd_binder.set_handler("encrypted_seed",
@@ -5043,7 +5043,7 @@ bool simple_wallet::donate(const std::vector<std::string> &args_)
   local_args.push_back(amount_str);
   if (!payment_id_str.empty())
     local_args.push_back(payment_id_str);
-  message_writer() << (boost::format(tr("Donating %s BLUR to The BLUR Project (www.blur.cash / %s ).")) % amount_str % BLUR_DONATION_ADDR).str(); 
+  message_writer() << (boost::format(tr("Donating %s BLCH to The BlurryCash Project (www.blurrycash.cash / %s ).")) % amount_str % BLUR_DONATION_ADDR).str(); 
   transfer(local_args);
   return true;
 }
@@ -7276,12 +7276,12 @@ int main(int argc, char* argv[])
 
   const auto vm = wallet_args::main(
    argc, argv,
-   "blur-wallet-cli [--wallet-file=<file>|--generate-new-wallet=<file>] [<COMMAND>]",
-    sw::tr("This is the command line Blurrycash wallet. It needs to connect to a Blurrycash daemon to work correctly."),
+   "blurry-wallet-cli [--wallet-file=<file>|--generate-new-wallet=<file>] [<COMMAND>]",
+    sw::tr("This is the command line BlurryCash wallet. It needs to connect to a BlurryCash daemon to work correctly."),
     desc_params,
     positional_options,
     [](const std::string &s, bool emphasis){ tools::scoped_message_writer(emphasis ? epee::console_color_white : epee::console_color_default, true) << s; },
-    "blur-wallet-cli.log"
+    "blurry-wallet-cli.log"
   );
 
   if (!vm)

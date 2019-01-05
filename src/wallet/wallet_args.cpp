@@ -135,8 +135,8 @@ namespace wallet_args
 
       if (command_line::get_arg(vm, command_line::arg_help))
       {
-        Print(print) << "BLUR '" << MONERO_RELEASE_NAME << "' (v" << MONERO_VERSION_FULL << ")" << ENDL;
-        Print(print) << wallet_args::tr("This is the command line blurrycash wallet. It needs to connect to a blurrycash\n"
+        Print(print) << "BlurryCash '" << MONERO_RELEASE_NAME << "' (v" << MONERO_VERSION_FULL << ")" << ENDL;
+        Print(print) << wallet_args::tr("This is the command line blur wallet. It needs to connect to a blur\n"
 												  "daemon to work correctly.") << ENDL;
         Print(print) << wallet_args::tr("Usage:") << ENDL << "  " << usage;
         Print(print) << desc_all;
@@ -144,7 +144,7 @@ namespace wallet_args
       }
       else if (command_line::get_arg(vm, command_line::arg_version))
       {
-        Print(print) << "BLURRYCASH '" << MONERO_RELEASE_NAME << "' (v" << MONERO_VERSION_FULL << ")";
+        Print(print) << "BlurryCash '" << MONERO_RELEASE_NAME << "' (v" << MONERO_VERSION_FULL << ")";
         return false;
       }
 
@@ -187,7 +187,7 @@ namespace wallet_args
     if (!command_line::is_arg_defaulted(vm, arg_max_concurrency))
       tools::set_max_concurrency(command_line::get_arg(vm, arg_max_concurrency));
 
-    Print(print) << "BLURRYCASH '" << MONERO_RELEASE_NAME << "' (v" << MONERO_VERSION_FULL << ")";
+    Print(print) << "BlurryCash '" << MONERO_RELEASE_NAME << "' (v" << MONERO_VERSION_FULL << ")";
 
     if (!command_line::is_arg_defaulted(vm, arg_log_level))
       MINFO("Setting log level = " << command_line::get_arg(vm, arg_log_level));
