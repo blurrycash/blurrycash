@@ -1,4 +1,3 @@
-// Copyright (c) 2017-2018, The Masari Project
 // Copyright (c) 2014-2018, The Monero Project
 // 
 // All rights reserved.
@@ -26,55 +25,55 @@
 // INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+// 
+// Parts of this file are originally copyright (c) 2012-2013 The Cryptonote developers
 
-#include "misc_log_ex.h"
+#pragma once
 
-#include "daemon/executor.h"
+#include "crypto/crypto.h"
+#include "cryptonote_basic/cryptonote_basic.h"
 
-#include "cryptonote_config.h"
-#include "version.h"
+#include "single_tx_test_base.h"
 
-#include <string>
-
-#undef MONERO_DEFAULT_LOG_CATEGORY
-#define MONERO_DEFAULT_LOG_CATEGORY "daemon"
-
-namespace daemonize
+class test_ge_tobytes : public multi_tx_test_base<1>
 {
-  std::string const t_executor::NAME = "Blurrycash Daemon";
+public:
+  static const size_t loop_count = 10000;
 
-  void t_executor::init_options(
-      boost::program_options::options_description & configurable_options
-    )
+  typedef multi_tx_test_base<1> base_class;
+
+  bool init()
   {
-    t_daemon::init_options(configurable_options);
+    using namespace cryptonote;
+
+    if (!base_class::init())
+      return false;
+
+    cryptonote::account_base m_alice;
+    cryptonote::transaction m_tx;
+
+    m_alice.generate();
+
+    std::vector<tx_destination_entry> destinations;
+    destinations.push_back(tx_destination_entry(1, m_alice.get_keys().m_account_address, false));
+
+    if (!construct_tx(this->m_miners[this->real_source_idx].get_keys(), this->m_sources, destinations, boost::none, std::vector<uint8_t>(), m_tx, 0))
+      return false;
+    
+    const cryptonote::txin_to_key& txin = boost::get<cryptonote::txin_to_key>(m_tx.vin[0]);
+    if (ge_frombytes_vartime(&m_p3, (const unsigned char*) &txin.k_image) != 0)
+      return false;
+
+    return true;
   }
 
-  std::string const & t_executor::name()
+  bool test()
   {
-    return NAME;
+    rct::key key;
+    ge_p3_tobytes(key.bytes, &m_p3);
+    return true;
   }
 
-  t_daemon t_executor::create_daemon(
-      boost::program_options::variables_map const & vm
-    )
-  {
-    LOG_PRINT_L0("Blurrycash '" << MONERO_RELEASE_NAME << "' (v" << MONERO_VERSION_FULL << ") Daemonised");
-    return t_daemon{vm};
-  }
-
-  bool t_executor::run_non_interactive(
-      boost::program_options::variables_map const & vm
-    )
-  {
-    return t_daemon{vm}.run(false);
-  }
-
-  bool t_executor::run_interactive(
-      boost::program_options::variables_map const & vm
-    )
-  {
-    return t_daemon{vm}.run(true);
-  }
-}
-
+private:
+  ge_p3 m_p3;
+};

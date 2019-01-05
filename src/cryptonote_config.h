@@ -157,7 +157,7 @@ namespace config
   uint16_t const ZMQ_RPC_DEFAULT_PORT = 13896;
   boost::uuids::uuid const NETWORK_ID = { {
       0x1E,0x32, 0x11, 0x2F , 0x54, 0x86 , 0x37, 0xFF, 0xAB, 0x92, 0xAA, 0xBC, 0x2F,0x89, 0x01, 0x2D
-    } }; // Poop Net
+    } }; //
   std::string const GENESIS_TX = "011901ff0001ffffffffffff0102bca7c97f7074ea888eac572fda0964cc864baf7bc07d6cecc052728039009d7621017133140c2abc1825f8d411db7bee4379a2a0f21b7af60e44ed7f07e9e66ccd8800";
 
 
@@ -173,7 +173,7 @@ namespace config
     uint16_t const ZMQ_RPC_DEFAULT_PORT = 31111;
     boost::uuids::uuid const NETWORK_ID = { {
         0x22 ,0x36, 0xF1, 0x22 , 0x54, 0x86 , 0x37, 0xFF, 0xAB, 0x89, 0x01, 0x92, 0xAA, 0xBC, 0x2F, 0x16
-      } }; // Meth Net
+      } }; // Post-Amnesia Eidetic
   }
 
   namespace stagenet
@@ -186,7 +186,7 @@ namespace config
     uint16_t const ZMQ_RPC_DEFAULT_PORT = 31107;
     boost::uuids::uuid const NETWORK_ID = { {
         0x22 ,0x36, 0xF1, 0x22 , 0x54, 0x86 , 0x36, 0xFF, 0xAB, 0x51, 0x00, 0x4F, 0x3C, 0x3D, 0xAA, 0x17
-      } }; // Drugs are Bad mmkay?
+      } }; // Lucid Deja-Vu
   }
 }
 

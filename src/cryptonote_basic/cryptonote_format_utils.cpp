@@ -44,6 +44,8 @@ using namespace epee;
 #include "crypto/hash.h"
 #include "ringct/rctSigs.h"
 #include "tx_extra.h"
+#include "syncobj.h"
+#include "cryptonote_core/blockchain.h"
 
 #undef MONERO_DEFAULT_LOG_CATEGORY
 #define MONERO_DEFAULT_LOG_CATEGORY "cn"
@@ -993,25 +995,45 @@ namespace cryptonote
     return p;
   }
 //--------------------------------------------------------------
-  bool get_block_longhash(const block& b, crypto::hash& res, uint64_t height)
+  critical_section m_db_lock;
+
+  uint64_t m_db_timestamp = 0;
+  uint64_t cached_height = 0;
+
+  bool get_block_longhash(const block& b, crypto::hash& res, uint64_t height, const cryptonote::Blockchain* bc)
   {
     blobdata bd = get_block_hashing_blob(b);
       int cn_variant = b.major_version >= 5 ? ( b.major_version >= 8 ? 2 : 1 ) : 0;
       int cn_iters = b.major_version >= 6 ? ( b.major_version >= 7 ? 0x40000 : 0x20000 ) : 0x80000;
 
-	  if (b.major_version <= 8)
+switch (b.major_version)
           {
-            cn_iters += ((height + 1) % 1024);
+      case 10:
+      {
+        cn_variant = 2;
+        if (height != cached_height)
+        {
+          CRITICAL_REGION_BEGIN(m_db_lock);
+            m_db_timestamp = bc->get_db().get_block_timestamp(height - CRYPTONOTE_MINED_MONEY_UNLOCK_WINDOW);
+            cached_height = height;
+          CRITICAL_REGION_END();
           }
 
-	  if (b.major_version >= 9)
+        cn_iters += (((m_db_timestamp % height) + (height + 1)) % 4096);
+        crypto::cn_slow_hash(bd.data(), bd.size(), res, cn_variant, cn_iters);
+        return true;
+      }
+      break;
+      case 9:
           {
-
-          uint64_t stamp = b.timestamp;
-
-          cn_iters += (((stamp % height) + (height + 1))  % 4096);
+        cn_iters += (((b.timestamp % height) + (height + 1)) % 4096);
+        crypto::cn_slow_hash(bd.data(), bd.size(), res, cn_variant, cn_iters);
+        return true;
+      }
+      break;
          }
 
+    cn_iters += ((height + 1) % 1024);
     crypto::cn_slow_hash(bd.data(), bd.size(), res, cn_variant, cn_iters);
     return true;
   }
@@ -1036,10 +1058,10 @@ namespace cryptonote
     return res;
   }
   //---------------------------------------------------------------
-  crypto::hash get_block_longhash(const block& b, uint64_t height)
+  crypto::hash get_block_longhash(const block& b, uint64_t height, const cryptonote::Blockchain* bc)
   {
     crypto::hash p = null_hash;
-    get_block_longhash(b, p, height);
+    get_block_longhash(b, p, height, bc);
     return p;
   }
   //---------------------------------------------------------------

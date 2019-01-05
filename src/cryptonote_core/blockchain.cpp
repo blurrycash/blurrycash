@@ -102,7 +102,8 @@ static const struct {
   { 6, 7500,   0, 1529974332 },
   { 7, 80000,  0, 1534323374 },
   { 8, 185000, 0, 1540624740 },
-  { 9, 211000, 0, 1543147200 }
+  { 9, 211000, 0, 1543147200 },
+  { 10, 270000, 0, 1546689600 }
 };
 
 static const struct {
@@ -1459,7 +1460,7 @@ bool Blockchain::handle_alternative_block(const block& b, const crypto::hash& id
     difficulty_type current_diff = get_next_difficulty_for_alternative_chain(alt_chain, bei);
     CHECK_AND_ASSERT_MES(current_diff, false, "!!!!!!! DIFFICULTY OVERHEAD !!!!!!!");
     crypto::hash proof_of_work = null_hash;
-    get_block_longhash(bei.bl, proof_of_work, bei.height);
+    get_block_longhash(bei.bl, proof_of_work, bei.height, this);
     if(!check_hash(proof_of_work, current_diff))
     {
       MERROR_VER("Block with id: " << id << std::endl << " for alternative chain, does not have enough proof of work: " << proof_of_work << std::endl << " expected difficulty: " << current_diff);
@@ -3257,7 +3258,7 @@ leave:
       proof_of_work = it->second;
     }
     else
-      proof_of_work = get_block_longhash(bl, m_db->height());
+      proof_of_work = get_block_longhash(bl, m_db->height(), this);
 
     // validate proof_of_work versus difficulty target
     if(!check_hash(proof_of_work, current_diffic))
@@ -3573,7 +3574,7 @@ void Blockchain::check_against_checkpoints(const checkpoints& points, bool enfor
       }
       else
       {
-        LOG_ERROR("WARNING: local blockchain failed to pass a BLURPulse checkpoint, and you could be on a fork. You should either sync up from scratch, OR download a fresh blockchain bootstrap, OR enable checkpoint enforcing with the --enforce-dns-checkpointing command-line option");
+        LOG_ERROR("WARNING: local blockchain failed to pass a BLCHPulse checkpoint, and you could be on a fork. You should either sync up from scratch, OR download a fresh blockchain bootstrap, OR enable checkpoint enforcing with the --enforce-dns-checkpointing command-line option");
       }
     }
   }
@@ -3635,7 +3636,7 @@ void Blockchain::block_longhash_worker(uint64_t height, const std::vector<block>
     if (m_cancel)
        break;
     crypto::hash id = get_block_hash(block);
-    crypto::hash pow = get_block_longhash(block, height++);
+    crypto::hash pow = get_block_longhash(block, height++, this);
     map.emplace(id, pow);
   }
 

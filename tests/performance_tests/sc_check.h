@@ -1,5 +1,4 @@
-// Copyright (c) 2017-2018, The Masari Project
-// Copyright (c) 2014-2018, The Monero Project
+// Copyright (c) 2018, The Monero Project
 // 
 // All rights reserved.
 // 
@@ -27,54 +26,27 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#include "misc_log_ex.h"
+#pragma once
 
-#include "daemon/executor.h"
+#include "crypto/crypto.h"
 
-#include "cryptonote_config.h"
-#include "version.h"
-
-#include <string>
-
-#undef MONERO_DEFAULT_LOG_CATEGORY
-#define MONERO_DEFAULT_LOG_CATEGORY "daemon"
-
-namespace daemonize
+class test_sc_check
 {
-  std::string const t_executor::NAME = "Blurrycash Daemon";
+public:
+  static const size_t loop_count = 10000000;
 
-  void t_executor::init_options(
-      boost::program_options::options_description & configurable_options
-    )
+  bool init()
   {
-    t_daemon::init_options(configurable_options);
+    m_scalar = crypto::rand<crypto::ec_scalar>();
+    return true;
   }
 
-  std::string const & t_executor::name()
+  bool test()
   {
-    return NAME;
+    sc_check((unsigned char*)m_scalar.data);
+    return true;
   }
 
-  t_daemon t_executor::create_daemon(
-      boost::program_options::variables_map const & vm
-    )
-  {
-    LOG_PRINT_L0("Blurrycash '" << MONERO_RELEASE_NAME << "' (v" << MONERO_VERSION_FULL << ") Daemonised");
-    return t_daemon{vm};
-  }
-
-  bool t_executor::run_non_interactive(
-      boost::program_options::variables_map const & vm
-    )
-  {
-    return t_daemon{vm}.run(false);
-  }
-
-  bool t_executor::run_interactive(
-      boost::program_options::variables_map const & vm
-    )
-  {
-    return t_daemon{vm}.run(true);
-  }
-}
-
+private:
+  crypto::ec_scalar m_scalar;
+};
