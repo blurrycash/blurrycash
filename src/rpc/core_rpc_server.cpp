@@ -1797,6 +1797,50 @@ namespace cryptonote
     return true;
   }
   //------------------------------------------------------------------------------------------------------------------------------
+  bool core_rpc_server::on_get_generated_coins(const COMMAND_RPC_GET_GENERATED_COINS::request& req, COMMAND_RPC_GET_GENERATED_COINS::response& res, epee::json_rpc::error& error_resp)
+  {
+    PERF_TIMER(on_get_generated_coins);
+    CHECK_CORE_READY();
+    uint64_t h = m_core.get_current_blockchain_height() - 1;
+    uint64_t c = m_core.get_blockchain_storage().get_db().get_block_already_generated_coins(h);
+    res.coins = c;
+    res.status = CORE_RPC_STATUS_OK;
+    return true;
+  }
+  //------------------------------------------------------------------------------------------------------------------------------
+  bool core_rpc_server::on_get_min_version(const COMMAND_RPC_MIN_VERSION::request& req, COMMAND_RPC_MIN_VERSION::response& res, epee::json_rpc::error& error_resp)
+  {
+    PERF_TIMER(on_get_min_version);
+    CHECK_CORE_READY();
+    res.version_int = m_core.get_blockchain_storage().get_minimum_version_for_fork(SUPPORTED_MIN_VERSION);
+    uint8_t a, b, c, d;
+    a = (uint8_t)(res.version_int >> 24);
+    b = (uint8_t)(res.version_int >> 16);
+    c = (uint8_t)(res.version_int >> 8);
+    d = (uint8_t)(res.version_int);
+
+    res.version_string = std::to_string(a) + "." + std::to_string(b) + "." + std::to_string(c) + "." + std::to_string(d);
+    res.status = CORE_RPC_STATUS_OK;
+    return true;
+  }
+  //------------------------------------------------------------------------------------------------------------------------------
+  bool core_rpc_server::on_get_tx_pubkey(const COMMAND_RPC_GET_TX_PUBKEY::request& req, COMMAND_RPC_GET_TX_PUBKEY::response& res, epee::json_rpc::error& error_resp)
+  {
+    PERF_TIMER(on_get_tx_pubkey);
+
+    std::vector<std::string> p_keys = m_core.get_tx_pubkey(req.extra);
+    
+    res.pubkey = p_keys[0];
+    
+    if (p_keys.size() > 1)
+      for (size_t i = 0; i < p_keys.size(); i++)
+        res.additional.push_back(p_keys.at(i));
+
+    res.status = CORE_RPC_STATUS_OK;
+
+    return true;
+  }
+  //------------------------------------------------------------------------------------------------------------------------------
   bool core_rpc_server::on_get_per_kb_fee_estimate(const COMMAND_RPC_GET_PER_KB_FEE_ESTIMATE::request& req, COMMAND_RPC_GET_PER_KB_FEE_ESTIMATE::response& res, epee::json_rpc::error& error_resp)
   {
     PERF_TIMER(on_get_per_kb_fee_estimate);
