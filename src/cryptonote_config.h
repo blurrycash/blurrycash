@@ -57,7 +57,7 @@
 #define BLOCKCHAIN_TIMESTAMP_CHECK_WINDOW_V2            12
 
 // MONEY_SUPPLY - total number coins to be generated
-#define MONEY_SUPPLY                                    UINT64_C(9223300000000000000)
+#define MONEY_SUPPLY                                    UINT64_C(14223300000000000000)
 #define EMISSION_SPEED_FACTOR_PER_MINUTE                (20)
 #define FINAL_SUBSIDY_PER_MINUTE                        ((uint64_t)300000000000) // 3 * pow(10, 11)
 
@@ -156,9 +156,9 @@ namespace config
   uint16_t const RPC_DEFAULT_PORT = 13895;
   uint16_t const ZMQ_RPC_DEFAULT_PORT = 13896;
   boost::uuids::uuid const NETWORK_ID = { {
-      0x1E,0x32, 0x11, 0x2F , 0x54, 0x86 , 0x37, 0xFF, 0xAB, 0x92, 0xAA, 0xBC, 0x2F,0x89, 0x01, 0x2D
+      0x1E,0x32, 0x11, 0x2F , 0x54, 0x86 , 0x37, 0xFF, 0xAB, 0x92, 0x2F,0x89, 0x01, 0xAA, 0xBC, 0x2D
     } }; //
-  std::string const GENESIS_TX = "011901ff0001ffffffffffff0102bca7c97f7074ea888eac572fda0964cc864baf7bc07d6cecc052728039009d7621017133140c2abc1825f8d411db7bee4379a2a0f21b7af60e44ed7f07e9e66ccd8800";
+  std::string const GENESIS_TX = "";
 
 
   uint32_t const GENESIS_NONCE = 10000;
@@ -173,7 +173,7 @@ namespace config
     uint16_t const ZMQ_RPC_DEFAULT_PORT = 31111;
     boost::uuids::uuid const NETWORK_ID = { {
         0x22 ,0x36, 0xF1, 0x22 , 0x54, 0x86 , 0x37, 0xFF, 0xAB, 0x89, 0x01, 0x92, 0xAA, 0xBC, 0x2F, 0x16
-      } }; // Post-Amnesia Eidetic
+      } }; // 
   }
 
   namespace stagenet
@@ -186,7 +186,7 @@ namespace config
     uint16_t const ZMQ_RPC_DEFAULT_PORT = 31107;
     boost::uuids::uuid const NETWORK_ID = { {
         0x22 ,0x36, 0xF1, 0x22 , 0x54, 0x86 , 0x36, 0xFF, 0xAB, 0x51, 0x00, 0x4F, 0x3C, 0x3D, 0xAA, 0x17
-      } }; // Lucid Deja-Vu
+      } }; // 
   }
 }
 
