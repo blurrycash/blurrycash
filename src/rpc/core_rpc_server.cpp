@@ -1795,7 +1795,6 @@ namespace cryptonote
   {
     PERF_TIMER(on_get_min_version);
     CHECK_CORE_READY();
-    res.version_int = m_core.get_blockchain_storage().get_minimum_version_for_fork(SUPPORTED_MIN_VERSION);
     uint8_t a, b, c, d;
     a = (uint8_t)(res.version_int >> 24);
     b = (uint8_t)(res.version_int >> 16);
