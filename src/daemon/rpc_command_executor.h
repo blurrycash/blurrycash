@@ -143,6 +143,12 @@ public:
 
   bool print_coinbase_tx_sum(uint64_t height, uint64_t count);
 
+  bool print_generated_coins();
+
+  bool min_version();
+
+  bool print_tx_pubkey(std::string extra);
+
   bool alt_chain_info();
 
   bool print_blockchain_dynamic_stats(uint64_t nblocks);

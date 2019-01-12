@@ -1020,31 +1020,6 @@ namespace cryptonote
       END_KV_SERIALIZE_MAP()
     };
   };
-  
-  //-----------------------------------------------
-  struct COMMAND_RPC_GET_GENERATED_COINS
-  {
-    struct request
-    {
-      uint64_t height;
-      
-      BEGIN_KV_SERIALIZE_MAP()
-        KV_SERIALIZE_OPT(height, (uint64_t)0)
-      END_KV_SERIALIZE_MAP()
-    };
-
-
-    struct response
-    {
-      uint64_t amount;
-      std::string status;
-
-      BEGIN_KV_SERIALIZE_MAP()
-        KV_SERIALIZE(amount)
-        KV_SERIALIZE(status)
-      END_KV_SERIALIZE_MAP()
-    };
-  };
 
   //-----------------------------------------------
   struct COMMAND_RPC_MINING_STATUS
@@ -2273,6 +2248,73 @@ namespace cryptonote
       BEGIN_KV_SERIALIZE_MAP()
         KV_SERIALIZE(status)
         KV_SERIALIZE(distributions)
+      END_KV_SERIALIZE_MAP()
+    };
+  };
+
+  struct COMMAND_RPC_GET_GENERATED_COINS
+  {
+    struct request
+    {
+      BEGIN_KV_SERIALIZE_MAP()
+      END_KV_SERIALIZE_MAP()
+    };
+
+    struct response
+    {
+      std::string status;
+      uint64_t coins;
+
+      BEGIN_KV_SERIALIZE_MAP()
+        KV_SERIALIZE(status)
+        KV_SERIALIZE(coins)
+      END_KV_SERIALIZE_MAP()
+    };
+  };
+
+  struct COMMAND_RPC_MIN_VERSION
+  {
+    struct request
+    {
+      BEGIN_KV_SERIALIZE_MAP()
+      END_KV_SERIALIZE_MAP()
+    };
+
+    struct response
+    {
+      std::string status;
+      std::string version_string;
+      uint32_t version_int;
+
+      BEGIN_KV_SERIALIZE_MAP()
+        KV_SERIALIZE(status)
+        KV_SERIALIZE(version_string)
+        KV_SERIALIZE(version_int)
+      END_KV_SERIALIZE_MAP()
+    };
+  };
+
+  struct COMMAND_RPC_GET_TX_PUBKEY
+  {
+    struct request
+    {
+      std::string extra;
+
+      BEGIN_KV_SERIALIZE_MAP()
+        KV_SERIALIZE(extra)
+      END_KV_SERIALIZE_MAP()
+    };
+
+    struct response
+    {
+      std::string status;
+      std::string pubkey;
+      std::vector<std::string> additional;
+
+      BEGIN_KV_SERIALIZE_MAP()
+        KV_SERIALIZE(status)
+        KV_SERIALIZE(pubkey)
+        KV_SERIALIZE(additional)
       END_KV_SERIALIZE_MAP()
     };
   };

@@ -737,13 +737,18 @@ namespace cryptonote
       * @return the number of blocks to sync in one go
       */
      std::pair<uint64_t, uint64_t> get_coinbase_tx_sum(const uint64_t start_offset, const size_t count);
-     
-     /**
-      * @copydoc BlockchainDB::get_already_generated_coins
-      *
-      * @note BlockchainDB::get_already_generated_coins
+
+      /**
+      * @brief get the sum of coinbase tx amounts for the entire chain
       */
-     uint64_t get_generated_coins(uint64_t height) const;
+     uint64_t get_generated_coins();
+
+     uint32_t get_min_version();
+
+      /**
+      * @brief get the tx pubkey from the transaction extra field
+      */
+     std::vector<std::string> get_tx_pubkey(std::string tx_extra);
      
      /**
       * @brief get the network type we're on
