@@ -171,19 +171,6 @@ namespace cryptonote
     {
       return true;
     }
-    ADD_CHECKPOINT(1,       "dded291f5d83d0fcce15ed07a12b0f12a5a328d319eecf91f327fbe81a629a6e");
-    ADD_CHECKPOINT(10,      "c9caaca89a64182a58f34275e9b3204c04497f26a9da04ac9c36e32df959b5a6");
-    ADD_CHECKPOINT(100,     "0c94df478c3ce73d37082a432349aa576ed36bb07ff55c066dadfcda73d53a6f");
-    ADD_CHECKPOINT(1000,    "cfed96d69e197895908b71766fcb4f1887ecb20da5a199ca544003a1fb6e751a");
-    ADD_CHECKPOINT(10000,   "f6c045bc8f4e4749185c58b1673e0ba1c0256b7c5b0bc4c11e5b6563b45193ab");
-    ADD_CHECKPOINT(50000,   "655124b25dc172446ca4edccf6bdfb1e6b6aadf4f7fb543b6409ab890f5e7f7d");
-    ADD_CHECKPOINT(80000,   "250106eea9561c099cab09db3ec1a8967beba2b02fe2e99d2206dbb80b17b7b7");
-    ADD_CHECKPOINT(100000,  "6e45258946faa11868f183e8f289511b9e2c266320de66d221b1ed5b014cee47");
-    ADD_CHECKPOINT(150000,  "88210b6d446d4f4c5a0a77432e8a2f1d5da0fd3fc82ef30b8db3693208e8fefe");
-    ADD_CHECKPOINT(185000,  "96ddfcdd4be315e438a93bd82cd505235f96ff33349313357ca123937f5c4fe1");
-    ADD_CHECKPOINT(200000,  "d6f939964ad727a7bd2bb44a909bf02079ea9caf7f55b0e791338860b3a89d0d");
-    return true;
-  }
 
   bool checkpoints::load_checkpoints_from_json(const std::string &json_hashfile_fullpath)
   {
