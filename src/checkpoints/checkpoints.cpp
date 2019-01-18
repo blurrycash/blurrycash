@@ -171,10 +171,7 @@ namespace cryptonote
     {
       return true;
     }
-    
-    return true;
-  }
-
+  
   bool checkpoints::load_checkpoints_from_json(const std::string &json_hashfile_fullpath)
   {
     boost::system::error_code errcode;
